@@ -1,0 +1,13 @@
+Flask
+flask-smorest
+SQLAlchemy
+Flask-Migrate
+marshmallow
+marshmallow-sqlalchemy
+Flask-JWT-Extended
+python-dateutil
+pytest
+pytest-flask
+coverage
+Flask-Limiter
+PyMySQL
