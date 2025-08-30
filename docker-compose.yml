@@ -1,0 +1,27 @@
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: bluewave
+      MYSQL_USER: bluewave
+      MYSQL_PASSWORD: bluewave
+      MYSQL_ROOT_PASSWORD: root
+      TZ: UTC
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+
+  api:
+    build: .
+    environment:
+      DATABASE_URL: mysql+pymysql://bluewave:bluewave@db:3306/bluewave
+      JWT_SECRET_KEY: change-me
+      FLASK_ENV: development
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+

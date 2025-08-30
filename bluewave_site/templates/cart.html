@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Cart</h2>
+{% if order %}
+  <ul class="list-group mb-3">
+    {% for it in order.items.all %}
+      <li class="list-group-item d-flex justify-content-between">
+        <span>{{ it.product.name }}</span>
+        <span>£{{ it.line_total }}</span>
+      </li>
+    {% endfor %}
+    <li class="list-group-item d-flex justify-content-between fw-bold">
+      <span>Total</span><span>£{{ order.total }}</span>
+    </li>
+  </ul>
+  <a class="btn btn-primary" href="{% url 'checkout' %}">Checkout</a>
+{% else %}
+  <p>Your cart is empty.</p>
+{% endif %}
+{% endblock %}
+
